@@ -5,7 +5,7 @@
 3、尽量使用了kotlin的相关语言 <br/>
 4、实现了MVP架构 <br/>
 5、通过(mActivity as MainActivity).sendMsg(action:String, value: Any)发送命令,<br/>
-   并通过实现onReceive进行监听，类似于广播的结构 <br/>
+&nbsp;&nbsp;&nbsp;并通过实现onReceive进行监听，类似于广播的结构 <br/>
 6、实现半透明状态栏 <br/>
 7、通过StubView实现加载失败显示友好页 <br/>
 8、提供了接口可以通过实现onTopViewCreated实现顶层栏目 <br/>
