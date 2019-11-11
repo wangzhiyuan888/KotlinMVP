@@ -1,4 +1,4 @@
-# <h1>KotlinMVP（Dagger2+RXJAVA+Kotlin+OKHttp+MVP </h1> <br/>
+# <h1>KotlinMVP Dagger2+RXJAVA+Kotlin+OKHttp+MVP </h1> <br/>
 这个我最近这一周学习到的kotlin相关知识，其中有一下知识点 <br/>
 1、Daggger2实现Activity，Fragment的配置 <br/>
 2、RXJAVA的应用 <br/>
