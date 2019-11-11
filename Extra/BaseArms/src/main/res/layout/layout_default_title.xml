@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    style="@style/layout_full"
+    android:background="@drawable/shape_app_bg"
+    android:minHeight="@dimen/dp40"
+    android:paddingLeft="@dimen/dp28"
+    android:paddingRight="@dimen/dp28">
+
+    <TextClock
+        android:id="@+id/vend_title_curr_date"
+        style="@style/layout_wrap"
+        android:layout_alignParentRight="true"
+        android:layout_centerVertical="true"
+        android:format24Hour ="yyyy-MM-dd HH:mm:ss"
+        android:format12Hour ="yyyy-MM-dd HH:mm:ss"
+        android:ellipsize="end"
+        android:gravity="center_vertical|right"
+        android:textColor="@color/white"
+        android:textSize="@dimen/sp12"
+        android:minWidth="@dimen/dp260" />
+</RelativeLayout>

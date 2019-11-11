@@ -1,0 +1,5 @@
+<resources>
+    <string name="app_name">My Application</string>
+    <!--toolbar-->
+    <string name="toolbar_search_text">输入课程或则教师名字</string>
+</resources>

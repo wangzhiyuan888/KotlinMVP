@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/base_root"
+    style="@style/layout_full"
+    android:background="@color/whitesmoke"
+    android:orientation="vertical">
+    <!-- 第一次加载中区域 -->
+    <ViewStub
+        android:id="@+id/loading_sub"
+        style="@style/layout_full"
+        android:inflatedId="@+id/loading_container"
+        android:layout="@layout/layout_loading_view"
+        android:visibility="gone"/>
+
+    <!-- 顶部Title区域 -->
+    <ViewStub
+        android:id="@+id/top_sub"
+        style="@style/layout_full_wrap"
+        android:inflatedId="@+id/top_container" />
+
+    <!-- 内容Content区域 -->
+    <ViewStub
+        android:id="@+id/content_sub"
+        style="@style/layout_full"
+        android:inflatedId="@+id/content_container" />
+
+</LinearLayout>

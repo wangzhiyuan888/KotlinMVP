@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    style="@style/layout_full"
+    android:orientation="vertical">
+
+    <!-- 第一次加载中区域 -->
+    <ViewStub
+        android:id="@+id/loading_sub"
+        style="@style/layout_full"
+        android:inflatedId="@+id/loading_container"
+        android:layout="@layout/layout_loading_view" />
+    <!-- 内容区域 -->
+
+    <ViewStub
+        android:id="@+id/content_sub"
+        style="@style/layout_full"
+        android:inflatedId="@+id/content_container" />
+    <!-- 异常区域 -->
+
+    <ViewStub
+        android:id="@+id/failure_sub"
+        style="@style/layout_full"
+        android:inflatedId="@+id/failure_container"
+        android:layout="@layout/layout_failure_view" />
+
+</LinearLayout>

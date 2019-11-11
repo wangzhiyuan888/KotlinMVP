@@ -1,0 +1,106 @@
+apply plugin: 'com.android.library'
+apply plugin: 'kotlin-android'
+apply plugin: 'kotlin-android-extensions'
+apply plugin: 'kotlin-kapt'
+
+android {
+    compileSdkVersion rootProject.ext.android["compileSdkVersion"]
+    buildToolsVersion rootProject.ext.android["buildToolsVersion"]
+    useLibrary 'org.apache.http.legacy'
+
+    compileOptions {
+        targetCompatibility JavaVersion.VERSION_1_8
+        sourceCompatibility JavaVersion.VERSION_1_8
+        incremental false
+    }
+
+    kapt {
+        generateStubs = true
+    }
+
+    defaultConfig {
+        minSdkVersion rootProject.ext.android["minSdkVersion"]
+        targetSdkVersion rootProject.ext.android["targetSdkVersion"]
+        versionCode rootProject.ext.android["versionCode"]
+        versionName rootProject.ext.android["versionName"]
+
+    }
+
+    buildTypes {
+        release {
+            minifyEnabled false
+            proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
+        }
+    }
+
+    /*sourceSets {
+        main.java.srcDirs += 'src/main/java'
+    }*/
+
+}
+
+dependencies {
+    implementation fileTree(dir: 'libs', include: ['*.jar'])
+    api(rootProject.ext.dependencies.support_v4) {
+        exclude module: 'support-annotations'
+    }
+    api(rootProject.ext.dependencies.appcompat_v7) {
+        exclude module: 'support-annotations'
+        exclude module: 'support-v4'
+    }
+    implementation(rootProject.ext.dependencies.cardview_v7) {
+        exclude module: 'support-annotations'
+    }
+    api(rootProject.ext.dependencies.recyclerview_v7)
+    api(rootProject.ext.dependencies.glide)
+    api(rootProject.ext.dependencies.springview)
+    api(rootProject.ext.dependencies.rxjava2)
+    api(rootProject.ext.dependencies.retrofit) {
+        exclude module: 'okhttp'
+        exclude module: 'okio'
+    }
+    api(rootProject.ext.dependencies.retrofit_adapter_rxjava2) {
+        exclude module: 'rxjava'
+        exclude module: 'okhttp'
+        exclude module: 'retrofit'
+        exclude module: 'okio'
+    }
+    api(rootProject.ext.dependencies.retrofit_converter_gson) {
+        exclude module: 'gson'
+        exclude module: 'okhttp'
+        exclude module: 'okio'
+        exclude module: 'retrofit'
+    }
+    api(rootProject.ext.dependencies.rxlifecycle2) {
+        exclude module: 'rxjava'
+        exclude module: 'jsr305'
+    }
+    api(rootProject.ext.dependencies.rxlifecycle2_components) {
+        exclude module: 'rxjava'
+        exclude module: 'jsr305'
+    }
+    api(rootProject.ext.dependencies.rxcache2) {
+        exclude module: 'rxjava'
+        exclude module: 'dagger'
+    }
+    api "org.jetbrains.kotlin:kotlin-stdlib-jdk8:$kotlin_version"
+    /*api(rootProject.ext.dependencies["butterknife"]) {
+        exclude module: 'support-annotations'
+    }*/
+    api 'com.jakewharton:butterknife:8.8.1'
+    //view
+    /*kapt(rootProject.ext.dependencies["butterknife-compiler"]) {
+        exclude module: 'support-annotations'
+    }*/
+    kapt('com.jakewharton:butterknife-compiler:8.8.1')
+
+    api(rootProject.ext.dependencies.dagger2)
+    kapt(rootProject.ext.dependencies.dagger2_compiler)
+    api(rootProject.ext.dependencies.gson)
+
+    api(rootProject.ext.dependencies.okhttp3)
+    api(rootProject.ext.dependencies.okhttp3_log_interceptor)
+
+    api(rootProject.ext.dependencies.flycotablayout)
+    api(rootProject.ext.dependencies.tagflowlayout)
+}

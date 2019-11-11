@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    style="@style/layout_full"
+    android:background="@drawable/base_bg_selector"
+    android:gravity="center"
+    android:orientation="vertical">
+
+    <ImageView
+        android:id="@+id/failure_img"
+        style="@style/layout_wrap"
+        android:layout_gravity="center_horizontal"
+        android:adjustViewBounds="true"
+        android:minWidth="@dimen/dp300"
+        android:minHeight="@dimen/dp300"
+        android:scaleType="fitCenter"
+        android:src="@drawable/net_error" />
+
+    <TextView
+        android:id="@+id/failure_msg"
+        style="@style/layout_wrap"
+        android:layout_gravity="center_horizontal"
+        android:layout_marginTop="@dimen/dp4"
+        android:ellipsize="end"
+        android:gravity="center"
+        android:padding="@dimen/dp4"
+        android:singleLine="true"
+        android:text="加载失败，点击重试"
+        android:textColor="@color/text_color_999999"
+        android:textSize="@dimen/sp14" />
+
+</LinearLayout>

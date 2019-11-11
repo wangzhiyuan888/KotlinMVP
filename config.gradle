@@ -1,0 +1,69 @@
+ext{
+
+    android = [
+            compileSdkVersion       : 28,
+            buildToolsVersion       : "28.0.3",
+            minSdkVersion           : 22,
+            targetSdkVersion        : 28,
+            versionCode             : 1,
+            versionName             : "1.0.0"
+    ]
+
+    version = [
+            androidSupportSdkVersion:  "28+",
+            dagger2SdkVersion        : "2.15",
+            okhttp3SdkVersion        :  "3.11.0",
+            glideSdkVersion          :  "4.9.0",
+            butterknifeSdkVersion   :  "9.0.0",
+            timberSdkVersion         :  "4.7.0",
+            retrofitSdkVersion      : "2.4.0",
+            rxlifecycle2SdkVersion  : "2.2.1"
+    ]
+
+    dependencies = [
+            //support
+            appcompat_v7              : "com.android.support:appcompat-v7:${version.androidSupportSdkVersion}",
+            support_v4               : "com.android.support:support-v4:${version.androidSupportSdkVersion}",
+            recyclerview_v7           : "com.android.support:recyclerview-v7:${version.androidSupportSdkVersion}",
+            cardview_v7               : "com.android.support:cardview-v7:${version.androidSupportSdkVersion}",
+
+            //network
+            retrofit                    : "com.squareup.retrofit2:retrofit:${version.retrofitSdkVersion}",
+            retrofit_converter_gson   : "com.squareup.retrofit2:converter-gson:${version.retrofitSdkVersion}",
+            retrofit_adapter_rxjava2  : "com.squareup.retrofit2:adapter-rxjava2:${version.retrofitSdkVersion}",
+            okhttp3                     : "com.squareup.okhttp3:okhttp:${version.okhttp3SdkVersion}",
+            okhttp3_log_interceptor   : "com.squareup.okhttp3:logging-interceptor:${version.okhttp3SdkVersion}",
+            glide                       : "com.github.bumptech.glide:glide:${version.glideSdkVersion}",
+            glide_compiler             : "com.github.bumptech.glide:compiler:${version.glideSdkVersion}",
+            glide_loader_okhttp3       : "com.github.bumptech.glide:okhttp3-integration:${version.glideSdkVersion}",
+
+            //view
+            butterknife                : "com.jakewharton:butterknife:${version.butterknifeSdkVersion}",
+            butterknife_compiler      : "com.jakewharton:butterknife-compiler:${version.butterknifeSdkVersion}",
+
+            //rx2
+            rxandroid2                 : "io.reactivex.rxjava2:rxandroid:2.0.2",
+            rxjava2                    : "io.reactivex.rxjava2:rxjava:2.1.12",
+            javax_annotation          : "javax.annotation:jsr250-api:1.0",
+            rxlifecycle2              : "com.trello.rxlifecycle2:rxlifecycle:${version.rxlifecycle2SdkVersion}",
+            rxlifecycle2_android     : "com.trello.rxlifecycle2:rxlifecycle-android:${version.rxlifecycle2SdkVersion}",
+            rxlifecycle2_components  : "com.trello.rxlifecycle2:rxlifecycle-components:${version.rxlifecycle2SdkVersion}",
+            rxcache2                  : "com.github.VictorAlbertos.RxCache:runtime:1.8.3-2.x",
+
+            //tools
+            dagger2                    : "com.google.dagger:dagger:${version.dagger2SdkVersion}",
+            dagger2_compiler          : "com.google.dagger:dagger-compiler:${version.dagger2SdkVersion}",
+            gson                       : "com.google.code.gson:gson:2.8.2",
+            //Flycotablayout
+            flycotablayout             :'com.flyco.tablayout:FlycoTabLayout_Lib:2.1.2@aar',
+            tagflowlayout              :'com.github.hymanme.tagflowlayout:tagflowlayout:0.2.2',
+
+            paginate                    : "com.github.markomilos:paginate:0.5.1",
+
+            springview                  : 'com.liaoinstan.springview:library:1.5.1',
+
+            //test
+            timber                     : "com.jakewharton.timber:timber:${version.timberSdkVersion}"
+    ]
+
+}
