@@ -88,7 +88,7 @@ class HomeFragment():BaseInjectFragment<HomePresenter>(), SpringView.OnFreshList
 
     }
 
-    override fun showError(msg: String) {
+    override fun showError(tag: String, msg: String) {
         ToastUtils.showToast(msg)
         this.springView.onFinishFreshAndLoad()
         showFailureView(msg)

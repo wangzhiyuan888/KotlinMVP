@@ -26,7 +26,7 @@ abstract class BaseInjectFragment<T : BaseContract.BasePresenter<*>> : BaseFragm
                 .fragmentModule(fragmentModule)
                 .build()
 
-    override fun showError(msg: String) {
+    override fun showError(tag:String, msg: String) {
     }
 
     override fun onDestroy() {

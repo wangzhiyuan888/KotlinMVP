@@ -15,11 +15,11 @@ import java.net.SocketTimeoutException
  * date: 2019/11/11
  * desc: 统一处理订阅者
  */
-abstract class BaseSubscriber<T>(private val view: BaseContract.BaseView?) : ResourceSubscriber<T>() {
+abstract class BaseSubscriber<T>(private val tag:String, private val view: BaseContract.BaseView?) : ResourceSubscriber<T>() {
     private var msg: String? = null
     abstract fun onSuccess(mData: T)
 
-    constructor(view: BaseContract.BaseView?, msg: String?) : this(view) {
+    constructor(tag:String, msg: String?, view: BaseContract.BaseView?) : this(tag, view) {
         this.msg = msg
     }
 
@@ -30,6 +30,9 @@ abstract class BaseSubscriber<T>(private val view: BaseContract.BaseView?) : Res
         super.onStart()
         if (!NetworkUtils.isConnected(AppUtils.appContext!!)) {
             // Logger.d("没有网络");
+            view?.let {
+                if (!msg.isNullOrEmpty()) it.showNetWorkError(msg!!)
+            }
             ToastUtils.showToast("当前网络连接异常")
             return
         }
@@ -47,14 +50,14 @@ abstract class BaseSubscriber<T>(private val view: BaseContract.BaseView?) : Res
 
     override fun onError(e: Throwable) {
         view?.let {
-            if (!msg.isNullOrEmpty()) it.showError(msg!!)
+            if (!msg.isNullOrEmpty()) it.showError(tag, msg!!)
             else {
                 when (e) {
-                    is ApiException -> it.showError(e.toString())
-                    is SocketTimeoutException -> it.showError("服务器响应超时ヽ(≧Д≦)ノ")
-                    is HttpException -> it.showError("数据加载失败ヽ(≧Д≦)ノ")
+                    is ApiException -> it.showError(tag, e.toString())
+                    is SocketTimeoutException -> it.showError(tag, "服务器响应超时ヽ(≧Д≦)ノ")
+                    is HttpException -> it.showError(tag, "数据加载失败ヽ(≧Д≦)ノ")
                     else -> {
-                        view.showError("未知错误ヽ(≧Д≦)ノ")
+                        view.showError(tag, "未知错误ヽ(≧Д≦)ノ")
                         LogUtils.e("MYERROR:$e")
                     }
                 }

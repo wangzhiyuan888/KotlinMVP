@@ -2,23 +2,41 @@ package com.wzy.arms.base
 
 import android.app.Activity
 import android.content.Context
+import android.graphics.Color
+import android.os.Build
 import android.os.Bundle
+import android.text.TextUtils
 import android.view.View
 import android.view.ViewStub
+import android.view.WindowManager
+import android.widget.ImageView
+import android.widget.TextView
+import butterknife.ButterKnife
+import butterknife.Unbinder
 import com.wzy.arms.R
 import com.wzy.arms.base.struct.FunctionsManager
 import com.wzy.arms.helper.ActivityCollector
 import com.trello.rxlifecycle2.components.support.RxAppCompatActivity
 import com.wzy.arms.utils.AppUtils
+import com.wzy.arms.utils.NetworkUtils
 import com.wzy.arms.utils.StatusBarUtil
+import com.wzy.arms.utils.ToastUtils
 
 abstract class BaseActivity: RxAppCompatActivity(){
 
     protected var mContext: Context? = null
     //加载正常的显示View
-    var mRootView: View ?= null
+    var mContentView: View ?= null
+    //错误页面
+    protected var mFailureView: View? = null;
+    //加载条的View
+    var mRootView:View? = null
     //加载条的View
     var mLoadingView:View? = null
+    //失败Stub
+    protected var mFailureStub: ViewStub? = null;
+
+    private var mUnbinder: Unbinder? = null
 
     var fmager: FunctionsManager? = null
 
@@ -27,6 +45,7 @@ abstract class BaseActivity: RxAppCompatActivity(){
         ActivityCollector.addActivity(this)
         setContentView(R.layout.activity_base)
         mContext = this
+
         initStatusBar()
         initInject()
         initPresenter()
@@ -42,6 +61,9 @@ abstract class BaseActivity: RxAppCompatActivity(){
         if (null != fmager)
             fmager = null
         super.onDestroy()
+        if (mUnbinder != null && mUnbinder !== Unbinder.EMPTY)
+            mUnbinder!!.unbind()
+        this.mUnbinder = null
         ActivityCollector.removeActivity(this)
     }
 
@@ -78,7 +100,11 @@ abstract class BaseActivity: RxAppCompatActivity(){
         val mTopStub = findViewById<ViewStub>(R.id.top_sub)
         val mContentStub = findViewById<ViewStub>(R.id.content_sub)
         onTopViewCreated(setLayout(mTopStub, topLayoutId()))
-        onContentViewCreated(setLayout(mContentStub, contentLayoutId()))
+        mContentView = setLayout(mContentStub, contentLayoutId())
+        onContentViewCreated(mContentView)
+        if (null != mContentView)
+            mUnbinder = ButterKnife.bind(this, mContentView!!)
+        mFailureStub = findViewById(R.id.failure_sub)
 
     }
 
@@ -157,6 +183,21 @@ abstract class BaseActivity: RxAppCompatActivity(){
 
     open fun initVariables() {}
 
+    /**
+     * 设置沉浸式状态栏
+     */
+    private fun setStatusBar() {
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
+            // 设置沉浸式状态栏
+            val decorView = window.decorView
+            val option = View.SYSTEM_UI_FLAG_LAYOUT_FULLSCREEN or View.SYSTEM_UI_FLAG_LAYOUT_STABLE
+            decorView.systemUiVisibility = option
+            // 设置状态栏透明
+            window.addFlags(WindowManager.LayoutParams.FLAG_DRAWS_SYSTEM_BAR_BACKGROUNDS)
+            window.statusBarColor = Color.TRANSPARENT
+        }
+    }
+
     private fun initStatusBar() = StatusBarUtil.setColorNoTranslucent(mContext as Activity, AppUtils.getColor(R.color.colorPrimary))
 
     open fun initPresenter() {
@@ -178,5 +219,48 @@ abstract class BaseActivity: RxAppCompatActivity(){
      * 加载数据
      */
     open fun loadData() {}
+
+
+
+    /**
+     * 显示异常内容；网络断开或无数据都属于异常情况
+     */
+    protected fun showFailureView(msg: String) {
+        showFailureView(R.drawable.net_error, msg)
+    }
+
+    /**
+     * 显示异常内容；网络断开或无数据都属于异常情况
+     */
+    protected fun showFailureView(imgResId: Int, msg: String) {
+        mContentView!!.visibility = View.GONE
+        if (null == mFailureView) {
+            mFailureView = mFailureStub!!.inflate()
+        }
+        val mFailureImg = mFailureView!!.findViewById<ImageView>(R.id.failure_img)
+        val mFailureMsg = mFailureView!!.findViewById<TextView>(R.id.failure_msg)
+        //imgResId = imgResId > 0 ? imgResId : R.drawable.net_error;
+        mFailureImg.visibility = if (imgResId > 0) View.VISIBLE else View.GONE
+        mFailureImg.setImageResource(imgResId)
+        mFailureMsg.text = if (TextUtils.isEmpty(msg)) "加载失败，点击重试" else msg
+        mFailureView!!.setOnClickListener({ v ->
+            if (!NetworkUtils.isConnected(AppUtils.appContext!!)) {
+                ToastUtils.showToast("当前网络连接异常")
+                return@setOnClickListener
+            }
+            hideFailureView()
+            loadData()
+        })
+        mFailureView!!.visibility = View.VISIBLE
+    }
+
+    /**
+     * 隐藏异常内容
+     */
+    protected fun hideFailureView() {
+        mContentView!!.visibility = View.VISIBLE
+        if (null != mFailureView)
+            mFailureView!!.visibility = View.GONE
+    }
 
 }

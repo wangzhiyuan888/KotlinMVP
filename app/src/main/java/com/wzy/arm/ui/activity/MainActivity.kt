@@ -12,6 +12,7 @@ import kotlinx.android.synthetic.main.activity_main.*
 import com.wzy.arms.widget.BottomTabBar
 import com.wzy.arm.ui.fragment.HomeFragment
 import com.wzy.arms.base.BaseFragment
+import com.wzy.arms.utils.LogUtils
 
 /**
  * Crtl+F9 自动生成DaggerMainComponent代码
@@ -52,15 +53,10 @@ class MainActivity : BaseInjectActivity<MainPresenter>(), MainContract.View{
                     }
                 })
 
-        bottom_bar.setOnClickListener {
-            sendMsg(ReceiverAction.RECEIVER_ACTION_REQUEST_USER,"大王-早上好!")
-
-        }
-
-
     }
 
     override fun loadData() {
+        setCenterText("首页")
 
     }
 
@@ -69,13 +65,6 @@ class MainActivity : BaseInjectActivity<MainPresenter>(), MainContract.View{
     }
 
     override fun onLoadingViewCreated(rootView: View, text: String) {
-    }
-
-    override fun onTopViewCreated(rootView: View?) {
-    }
-
-    override fun topLayoutId(): Int {
-        return 0
     }
 
     override fun onContentViewCreated(rootView: View?) {
@@ -102,6 +91,19 @@ class MainActivity : BaseInjectActivity<MainPresenter>(), MainContract.View{
             if(null != fragment)
                 (fragment as BaseFragment).sendMessageByActivity(action,(value as String)+":"+i)
         }
+    }
+
+    override fun showNetWorkError(msg: String) {
+        showFailureView(msg)
+
+    }
+
+    override fun showError(tag: String, msg: String) {
+
+    }
+
+    override fun onOtherClick(v: View) {
+
     }
 
 }

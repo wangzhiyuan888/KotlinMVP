@@ -1,10 +1,10 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <color name="colorPrimary">#2D3035</color>
+    <color name="colorPrimary">#0CB65B</color>
     <color name="text_color">#353F49</color>
     <color name="search_background">#F3F3F3</color>
     <!-- 通用背景色 -->
-    <color name="base_bg_color">#f8f8f8</color>
+    <color name="base_bg_color">#0CB65B</color>
 
     <!-- 底部导航条颜色-->
     <color name="tab_unchecked">#555555</color>

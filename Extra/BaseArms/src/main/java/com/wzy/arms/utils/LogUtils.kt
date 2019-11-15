@@ -18,7 +18,7 @@ import java.util.*
  */
 object LogUtils {
     private val LOG_SWITCH = true // 日志文件总开关
-    private val LOG_TO_FILE = false // 日志写入文件开关
+    private val LOG_TO_FILE = true // 日志写入文件开关
     private val LOG_TAG = "TAG" // 默认的tag
     private val LOG_TYPE = 'v' // 输入日志类型，v代表输出所有信息,w则只输出警告...
     private val LOG_SAVE_DAYS = 7 // sd卡中日志文件的最多保存天数

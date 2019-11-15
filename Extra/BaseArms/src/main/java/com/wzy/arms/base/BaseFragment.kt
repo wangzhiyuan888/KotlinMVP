@@ -19,6 +19,9 @@ import butterknife.ButterKnife
 import butterknife.Unbinder
 import com.trello.rxlifecycle2.components.support.RxFragment
 import com.wzy.arms.R
+import com.wzy.arms.utils.AppUtils
+import com.wzy.arms.utils.NetworkUtils
+import com.wzy.arms.utils.ToastUtils
 
 abstract class BaseFragment: RxFragment() {
     //正式页面
@@ -65,13 +68,8 @@ abstract class BaseFragment: RxFragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        mLoadingStub = view.findViewById(R.id.loading_sub)
-        val mContentStub = view.findViewById<ViewStub>(R.id.content_sub)
-        mContentView = setLayout(mContentStub, getLayoutId())
-        if (null != mContentView)
-            mUnbinder = ButterKnife.bind(this, mContentView!!)
-        mFailureStub = view.findViewById(R.id.failure_sub)
 
+        initStub(view)
         initInject()
         initPresenter()
         initVariables()
@@ -79,6 +77,19 @@ abstract class BaseFragment: RxFragment() {
         initSetListener()
         finishCreateView(savedInstanceState)
         initDatas()
+    }
+
+    /**
+     * 初始化StubView
+     */
+    private fun initStub(view: View){
+        mLoadingStub = view.findViewById(R.id.loading_sub)
+        val mContentStub = view.findViewById<ViewStub>(R.id.content_sub)
+        mContentView = setLayout(mContentStub, getLayoutId())
+        if (null != mContentView)
+            mUnbinder = ButterKnife.bind(this, mContentView!!)
+        mFailureStub = view.findViewById(R.id.failure_sub)
+
     }
 
     // ViewStub.inflate();执行完之后返回的View实际上是替换后的那个View的根布局
@@ -295,6 +306,10 @@ abstract class BaseFragment: RxFragment() {
         mFailureImg.setImageResource(imgResId)
         mFailureMsg.text = if (TextUtils.isEmpty(msg)) "加载失败，点击重试" else msg
         mFailureView!!.setOnClickListener({ v ->
+            if (!NetworkUtils.isConnected(AppUtils.appContext!!)) {
+                ToastUtils.showToast("当前网络连接异常")
+                return@setOnClickListener
+            }
             hideFailureView()
             reLoadData()
         })

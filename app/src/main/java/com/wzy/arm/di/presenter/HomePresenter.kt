@@ -20,7 +20,7 @@ constructor(private val mRetrofitHelper: RetrofitHelper) :
     override fun requestUsers(since: Int?, perPage: Int?) {
         val subscriber = mRetrofitHelper.requestUsers(since, perPage)
                 .compose(rxSchedulerHelper())
-                .subscribeWith(object : BaseSubscriber<MutableList<User>>(mView) {
+                .subscribeWith(object : BaseSubscriber<MutableList<User>>("requestUsers", mView) {
                     override fun onSuccess(mData: MutableList<User>) {
                         mView?.showUsers(mData)
                     }

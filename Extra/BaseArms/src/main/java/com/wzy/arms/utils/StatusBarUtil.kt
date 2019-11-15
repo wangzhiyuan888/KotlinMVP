@@ -33,7 +33,6 @@ object StatusBarUtil {
      * @param color 状态栏颜色值
      * @param statusBarAlpha 状态栏透明度
      */
-
     @JvmOverloads
     fun setColor(activity: Activity, @ColorInt color: Int, @IntRange(from = 0, to = 255) statusBarAlpha: Int = DEFAULT_STATUS_BAR_ALPHA) {
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
@@ -521,4 +520,5 @@ object StatusBarUtil {
         blue = (blue * a + 0.5).toInt()
         return 0xff shl 24 or (red shl 16) or (green shl 8) or blue
     }
+
 }

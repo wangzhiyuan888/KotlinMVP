@@ -31,6 +31,7 @@
     <dimen name="dp38">38dp</dimen>
     <dimen name="dp40">40dp</dimen>
     <dimen name="dp44">44dp</dimen>
+    <dimen name="dp45">45dp</dimen>
     <dimen name="dp48">48dp</dimen>
     <dimen name="dp50">50dp</dimen>
     <dimen name="dp55">55dp</dimen>
