@@ -41,7 +41,6 @@ abstract class BaseInjectActivity<T : BaseContract.BasePresenter<*>> : BaseActiv
 
     override fun onDestroy() {
         mPresenter.detachView()
-        BaseApp.instance.removeActivity(this)
         super.onDestroy()
     }
 
@@ -49,6 +48,16 @@ abstract class BaseInjectActivity<T : BaseContract.BasePresenter<*>> : BaseActiv
     }
 
     override fun complete() {
+    }
+
+    override fun loadingLayoutId(): Int {
+        return 0
+    }
+
+    override fun onLoadingViewCreated(rootView: View, text: String) {
+    }
+
+    override fun onContentViewCreated(rootView: View?) {
     }
 
     /**
@@ -139,7 +148,6 @@ abstract class BaseInjectActivity<T : BaseContract.BasePresenter<*>> : BaseActiv
             BaseTitleStyle.OTHERS ->{
                 return 0
             }
-
 
         }
         return 0

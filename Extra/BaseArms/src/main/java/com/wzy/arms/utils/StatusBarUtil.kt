@@ -235,9 +235,9 @@ object StatusBarUtil {
      * @param needOffsetView 需要向下偏移的 View
      */
     fun setTranslucentForImageView(
-        activity: Activity,
-        @IntRange(from = 0, to = 255) statusBarAlpha: Int,
-        needOffsetView: View?
+            activity: Activity,
+            @IntRange(from = 0, to = 255) statusBarAlpha: Int,
+            needOffsetView: View?
     ) {
         if (Build.VERSION.SDK_INT > Build.VERSION_CODES.KITKAT) {
             // 5.0以上版本

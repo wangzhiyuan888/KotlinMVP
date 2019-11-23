@@ -72,11 +72,15 @@ abstract class BaseFragment: RxFragment() {
         initStub(view)
         initInject()
         initPresenter()
-        initVariables()
         initWidget()
         initSetListener()
-        finishCreateView(savedInstanceState)
-        initDatas()
+        if(!isViewPager()){
+            loadData()
+
+        }else{
+            finishCreateView(savedInstanceState)
+
+        }
     }
 
     /**
@@ -108,15 +112,30 @@ abstract class BaseFragment: RxFragment() {
         this.mUnbinder = null
     }
 
+    /**
+     * 初始化监听事件
+     */
     protected open fun initSetListener() {
     }
 
+    /**
+     * 懒加载
+     */
     protected open fun lazyLoadData() {
     }
 
-    protected open fun initDatas() {
-        loadData()
+    /**
+     * 判断是否为ViewPager的情况，是：true，否：false
+     * 如果为是的情况则会调用setUserVisibleHint方法进行懒加载的处理
+     */
+    protected open fun isViewPager():Boolean{
+        return false
     }
+
+    /**
+     * 加载数据
+     */
+    protected open fun loadData() {}
 
     open fun finishCreateView(state: Bundle?) {
         mIsPrepared = true
@@ -156,11 +175,6 @@ abstract class BaseFragment: RxFragment() {
     protected open fun initPresenter() {}
 
     /**
-     * 初始化变量
-     */
-    open fun initVariables() {}
-
-    /**
      * 重新加载数据
      */
     open fun reLoadData(){}
@@ -176,11 +190,6 @@ abstract class BaseFragment: RxFragment() {
 
     protected open fun onInvisible() {
     }
-
-    /**
-     * 加载数据
-     */
-    protected open fun loadData() {}
 
     /**
      * 注入dagger2依赖

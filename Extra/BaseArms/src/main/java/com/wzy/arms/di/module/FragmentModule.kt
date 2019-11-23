@@ -19,4 +19,6 @@ class FragmentModule(val fragment: Fragment) {
     @FragmentScope
     fun provideActivity(): Activity = fragment.activity!!
 
+
+
 }

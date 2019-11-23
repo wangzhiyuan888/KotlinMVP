@@ -103,4 +103,5 @@ dependencies {
 
     api(rootProject.ext.dependencies.flycotablayout)
     api(rootProject.ext.dependencies.tagflowlayout)
+    api(rootProject.ext.dependencies.jolyglot)
 }

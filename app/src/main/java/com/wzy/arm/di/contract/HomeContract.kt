@@ -19,6 +19,6 @@ interface HomeContract {
     }
 
     interface Presenter<in T> : BaseContract.BasePresenter<T> {
-        fun requestUsers(since: Int?, perPage:Int?)
+        fun requestUsers(since: Int?, perPage:Int?, update: Boolean?)
     }
 }

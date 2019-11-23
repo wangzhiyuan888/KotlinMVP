@@ -3,6 +3,7 @@ package com.wzy.arm.ui.fragment
 import kotlinx.android.synthetic.main.fragment_home.*
 import android.support.v7.widget.GridLayoutManager
 import android.util.Log
+import android.view.View
 import com.liaoinstan.springview.container.DefaultFooter
 import com.liaoinstan.springview.container.DefaultHeader
 import com.wzy.arm.R
@@ -33,7 +34,12 @@ class HomeFragment():BaseInjectFragment<HomePresenter>(), SpringView.OnFreshList
 
     protected var mAdapter: HomeAdapter? = HomeAdapter(ArrayList())
 
-    private var pageInfo: PageInfo = PageInfo();
+    /**
+     * update: false:使用缓存，true：不使用缓存
+     */
+    protected var update: Boolean = false
+
+    private var pageInfo: PageInfo = PageInfo()
 
     override fun getLayoutId(): Int = R.layout.fragment_home
 
@@ -41,11 +47,8 @@ class HomeFragment():BaseInjectFragment<HomePresenter>(), SpringView.OnFreshList
 
     override fun initPresenter() = mPresenter.attachView(this)
 
-    override fun initVariables() {
-    }
-
     override fun reLoadData() {
-        loadData()
+        lazyLoadData()
     }
 
     override fun initWidget() {
@@ -55,17 +58,17 @@ class HomeFragment():BaseInjectFragment<HomePresenter>(), SpringView.OnFreshList
     }
 
     override fun loadData() {
-        mPresenter.requestUsers(pageInfo.page, pageInfo.pageNumber);
+        mPresenter.requestUsers(pageInfo.page, pageInfo.pageNumber, update)
 
     }
 
     override fun onRefresh() {
         pageInfo.page = 1
-        mPresenter.requestUsers(pageInfo.page, pageInfo.pageNumber);
+        mPresenter.requestUsers(pageInfo.page, pageInfo.pageNumber, update)
     }
 
     override fun onLoadmore() {
-        mPresenter.requestUsers(pageInfo.page, pageInfo.pageNumber);
+        mPresenter.requestUsers(pageInfo.page, pageInfo.pageNumber, update)
 
     }
 
@@ -101,6 +104,10 @@ class HomeFragment():BaseInjectFragment<HomePresenter>(), SpringView.OnFreshList
 
     override fun onReceive(action: String, value: Any) {
         Log.d("HomeFragment", "action:"+action+"     value:"+value as String)
+    }
+
+    override fun onOtherClick(v: View) {
+
     }
 
 }

@@ -14,9 +14,8 @@ import android.widget.TextView
 import butterknife.ButterKnife
 import butterknife.Unbinder
 import com.wzy.arms.R
-import com.wzy.arms.base.struct.FunctionsManager
-import com.wzy.arms.helper.ActivityCollector
 import com.trello.rxlifecycle2.components.support.RxAppCompatActivity
+import com.wzy.arms.manager.ActivityStackManager
 import com.wzy.arms.utils.AppUtils
 import com.wzy.arms.utils.NetworkUtils
 import com.wzy.arms.utils.StatusBarUtil
@@ -28,7 +27,7 @@ abstract class BaseActivity: RxAppCompatActivity(){
     //加载正常的显示View
     var mContentView: View ?= null
     //错误页面
-    protected var mFailureView: View? = null;
+    protected var mFailureView: View? = null
     //加载条的View
     var mRootView:View? = null
     //加载条的View
@@ -38,33 +37,27 @@ abstract class BaseActivity: RxAppCompatActivity(){
 
     private var mUnbinder: Unbinder? = null
 
-    var fmager: FunctionsManager? = null
-
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        ActivityCollector.addActivity(this)
+        ActivityStackManager.instance.addActivity(this)
         setContentView(R.layout.activity_base)
         mContext = this
 
         initStatusBar()
         initInject()
         initPresenter()
-        initVariables()
-        BaseApp.instance.addActivity(this)
         initStub()
         initWidget()
-        loadDatas()
+        loadData()
 
     }
 
     override fun onDestroy() {
-        if (null != fmager)
-            fmager = null
         super.onDestroy()
         if (mUnbinder != null && mUnbinder !== Unbinder.EMPTY)
             mUnbinder!!.unbind()
         this.mUnbinder = null
-        ActivityCollector.removeActivity(this)
+        ActivityStackManager.instance.removeActivity(this)
     }
 
     /**
@@ -128,7 +121,7 @@ abstract class BaseActivity: RxAppCompatActivity(){
      */
     open fun sendMsg(action:String, value: Any){
         if (action in receiverActions()) {
-            ActivityCollector.sendMessage(action, value)
+            ActivityStackManager.instance.sendMessage(action, value)
 
         }
 
@@ -181,8 +174,6 @@ abstract class BaseActivity: RxAppCompatActivity(){
         return mutableListOf()
     }
 
-    open fun initVariables() {}
-
     /**
      * 设置沉浸式状态栏
      */
@@ -206,10 +197,6 @@ abstract class BaseActivity: RxAppCompatActivity(){
     open fun initInject() {
     }
 
-    open fun loadDatas() {
-        loadData()
-    }
-
     /**
      * 初始化控件
      */
@@ -219,8 +206,6 @@ abstract class BaseActivity: RxAppCompatActivity(){
      * 加载数据
      */
     open fun loadData() {}
-
-
 
     /**
      * 显示异常内容；网络断开或无数据都属于异常情况

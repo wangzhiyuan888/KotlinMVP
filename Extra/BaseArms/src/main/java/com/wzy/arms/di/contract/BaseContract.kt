@@ -11,7 +11,7 @@ interface BaseContract {
         /**
          *  请求错误
          */
-        fun showError(tag: String, msg: String)
+        open fun showError(tag: String, msg: String){}
 
         open fun showNetWorkError(msg: String){}
 

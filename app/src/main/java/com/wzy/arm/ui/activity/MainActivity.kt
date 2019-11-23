@@ -2,17 +2,15 @@ package com.wzy.arm.ui.activity
 
 import android.os.Build
 import android.view.View
-import com.wzy.arm.R
 import com.wzy.arm.base.BaseInjectActivity
 import com.wzy.arm.di.contract.MainContract
 import com.wzy.arm.di.presenter.MainPresenter
 import com.wzy.arms.iter.ReceiverAction
-import com.wzy.arms.utils.StatusBarUtil
 import kotlinx.android.synthetic.main.activity_main.*
 import com.wzy.arms.widget.BottomTabBar
 import com.wzy.arm.ui.fragment.HomeFragment
 import com.wzy.arms.base.BaseFragment
-import com.wzy.arms.utils.LogUtils
+import com.wzy.arm.R
 
 /**
  * Crtl+F9 自动生成DaggerMainComponent代码
@@ -25,8 +23,8 @@ class MainActivity : BaseInjectActivity<MainPresenter>(), MainContract.View{
 
     override fun initWidget() {
         // 作用：我的账户的状态栏延伸至最顶部
-        StatusBarUtil.setTranslucentForImageView(this, 0, null)
-        StatusBarUtil.setLightMode(this)
+        /*StatusBarUtil.setTranslucentForImageView(this, 0, null)
+        StatusBarUtil.setLightMode(this)*/
 
         var selectColor: Int
         var unSelectColor: Int
@@ -60,20 +58,6 @@ class MainActivity : BaseInjectActivity<MainPresenter>(), MainContract.View{
 
     }
 
-    override fun loadingLayoutId(): Int {
-        return 0
-    }
-
-    override fun onLoadingViewCreated(rootView: View, text: String) {
-    }
-
-    override fun onContentViewCreated(rootView: View?) {
-    }
-
-    override fun hideLoading() {
-
-    }
-
     override fun receiverActions(): MutableList<String> {
         return mutableListOf(ReceiverAction.RECEIVER_ACTION_REQUEST_USER)
     }
@@ -93,14 +77,9 @@ class MainActivity : BaseInjectActivity<MainPresenter>(), MainContract.View{
         }
     }
 
-    override fun showNetWorkError(msg: String) {
-        showFailureView(msg)
+    /*override fun showError(tag: String, msg: String) {
 
-    }
-
-    override fun showError(tag: String, msg: String) {
-
-    }
+    }*/
 
     override fun onOtherClick(v: View) {
 

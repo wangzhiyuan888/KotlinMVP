@@ -3,6 +3,7 @@ package com.wzy.arms.network.helper
 import com.wzy.arms.network.api.ApiService
 import com.wzy.arms.network.model.User
 import io.reactivex.Flowable
+import io.reactivex.Observable
 
 /**
  * @author: wzy
@@ -14,6 +15,6 @@ class RetrofitHelper(private val mApiService: ApiService) {
     /*******************************ApiService *********************************/
 
     // 获取精选内容
-    fun requestUsers(since: Int?, perPage: Int?): Flowable<MutableList<User>> = mApiService.getUsers(since!!, perPage!!)
+    fun requestUsers(perPage: Int?, pageNumber: Int?): Flowable<MutableList<User>> = mApiService.getUsers(perPage!!, pageNumber!!)
 }
 

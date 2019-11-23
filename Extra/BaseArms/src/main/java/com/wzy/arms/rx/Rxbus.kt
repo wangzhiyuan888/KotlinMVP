@@ -1,6 +1,6 @@
 package com.wzy.arms.rx
 
-import com.wzy.arms.utils.rxSchedulerHelper
+import com.wzy.arms.utils.rxSchedulerFlowableHelper
 import io.reactivex.Flowable
 import io.reactivex.disposables.Disposable
 import io.reactivex.functions.Consumer
@@ -24,5 +24,5 @@ object RxBus {
     fun <T> toFlowable(eventType: Class<T>): Flowable<T> = bus.ofType(eventType)
 
     // 封装默认订阅
-    fun <T> toDefaultFlowable(eventType: Class<T>, act: Consumer<T>): Disposable = bus.ofType(eventType).compose(rxSchedulerHelper<T>()).subscribe(act)
+    fun <T> toDefaultFlowable(eventType: Class<T>, act: Consumer<T>): Disposable = bus.ofType(eventType).compose(rxSchedulerFlowableHelper<T>()).subscribe(act)
 }

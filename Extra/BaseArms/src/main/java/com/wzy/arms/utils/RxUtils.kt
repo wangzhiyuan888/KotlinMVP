@@ -3,6 +3,7 @@ package com.wzy.arms.utils
 import io.reactivex.BackpressureStrategy
 import io.reactivex.Flowable
 import io.reactivex.FlowableTransformer
+import io.reactivex.ObservableTransformer
 import io.reactivex.android.schedulers.AndroidSchedulers
 import io.reactivex.schedulers.Schedulers
 
@@ -18,8 +19,20 @@ import io.reactivex.schedulers.Schedulers
  * @param <T>
  * @return
 </T> */
-fun <T> rxSchedulerHelper(): FlowableTransformer<T, T> =
+fun <T> rxSchedulerFlowableHelper(): FlowableTransformer<T, T> =
         FlowableTransformer { observable ->
+            observable.subscribeOn(Schedulers.io())
+                    .observeOn(AndroidSchedulers.mainThread())
+        } // compose简化线程 统一处理线程
+
+/**
+ * 统一线程处理
+ *
+ * @param <T>
+ * @return
+</T> */
+fun <T> rxSchedulerObservableHelper(): ObservableTransformer<T, T> =
+        ObservableTransformer { observable ->
             observable.subscribeOn(Schedulers.io())
                     .observeOn(AndroidSchedulers.mainThread())
         } // compose简化线程 统一处理线程
