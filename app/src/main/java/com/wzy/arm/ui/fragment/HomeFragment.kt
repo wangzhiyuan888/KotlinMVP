@@ -10,14 +10,14 @@ import com.wzy.arm.R
 import com.wzy.arm.base.BaseInjectFragment
 import com.wzy.arm.di.contract.HomeContract
 import com.wzy.arm.di.presenter.HomePresenter
-import com.wzy.arms.network.model.PageInfo
-import com.wzy.arms.network.model.User
 import com.wzy.arms.utils.ArmsUtils
 import com.wzy.arms.utils.ToastUtils
 import com.liaoinstan.springview.widget.SpringView
 import com.wzy.arm.ui.activity.MainActivity
 import com.wzy.arm.ui.adapter.HomeAdapter
 import com.wzy.arms.iter.ReceiverAction
+import com.wzy.arms.network.model.PageInfo
+import com.wzy.arms.network.model.UserInfo
 
 /**
  * @author: wzy
@@ -83,7 +83,7 @@ class HomeFragment():BaseInjectFragment<HomePresenter>(), SpringView.OnFreshList
         springView.setListener(this)
     }
 
-    override fun showUsers(users: MutableList<User>) {
+    override fun showUsers(users: MutableList<UserInfo>) {
         mAdapter!!.onRefresh(users, pageInfo.page == 1)
         pageInfo.page = pageInfo.page+1
 

@@ -5,7 +5,6 @@ import android.view.View
 import android.support.annotation.NonNull
 import org.jetbrains.annotations.NotNull
 
-
 abstract class BaseHolder<T>
 constructor(@NotNull itemView: View) : RecyclerView.ViewHolder(itemView), View.OnClickListener{
     protected var mOnViewClickListener: OnViewClickListener? = null

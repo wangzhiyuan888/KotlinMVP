@@ -3,7 +3,6 @@ package com.wzy.arms.widget.util
 import android.annotation.SuppressLint
 import android.content.Context
 import android.os.Build
-import android.support.annotation.RequiresApi
 
 object ColorUtil {
 

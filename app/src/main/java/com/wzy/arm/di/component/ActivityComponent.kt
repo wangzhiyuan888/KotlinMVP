@@ -6,7 +6,6 @@ import com.wzy.arm.di.module.ActivityModule
 import com.wzy.arms.di.component.ApiComponent
 import com.wzy.arms.di.scope.ActivityScope
 
-
 import dagger.Component
 
 /**

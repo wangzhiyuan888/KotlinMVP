@@ -5,12 +5,11 @@ import com.wzy.arm.R
 import com.wzy.arm.ui.holder.HomeHolder
 import com.wzy.arms.base.BaseHolder
 import com.wzy.arms.base.DefaultAdapter
-import com.wzy.arms.network.model.User
-import kotlinx.android.synthetic.main.recycle_list.*
+import com.wzy.arms.network.model.UserInfo
 
-class HomeAdapter(private val mDatas: MutableList<User>) : DefaultAdapter<User>(mDatas) {
+class HomeAdapter(private val mDatas: MutableList<UserInfo>) : DefaultAdapter<UserInfo>(mDatas) {
 
-    override fun getHolder(v: View, viewType: Int): BaseHolder<User> {
+    override fun getHolder(v: View, viewType: Int): BaseHolder<UserInfo> {
         return HomeHolder(v)
     }
 
@@ -18,7 +17,7 @@ class HomeAdapter(private val mDatas: MutableList<User>) : DefaultAdapter<User>(
         return R.layout.recycle_list;
     }
 
-    fun onRefresh(users: List<User>, isRefresh : Boolean){
+    fun onRefresh(users: List<UserInfo>, isRefresh : Boolean){
         if(isRefresh){
             mDatas.clear()
         }

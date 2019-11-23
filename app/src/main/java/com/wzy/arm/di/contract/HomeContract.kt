@@ -1,7 +1,7 @@
 package com.wzy.arm.di.contract
 
 import com.wzy.arms.di.contract.BaseContract
-import com.wzy.arms.network.model.User
+import com.wzy.arms.network.model.UserInfo
 
 /**
  * @author: wzy
@@ -15,7 +15,7 @@ interface HomeContract {
         /**
          * 加载结果
          */
-        fun showUsers(users: MutableList<User>)
+        fun showUsers(users: MutableList<UserInfo>)
     }
 
     interface Presenter<in T> : BaseContract.BasePresenter<T> {
