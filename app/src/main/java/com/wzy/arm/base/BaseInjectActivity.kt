@@ -74,18 +74,18 @@ abstract class BaseInjectActivity<T : BaseContract.BasePresenter<*>> : BaseActiv
         var baseTitleStyle:BaseTitleStyle = topTitleStyle()
         when(baseTitleStyle){
             BaseTitleStyle.TV_TV_TV_STYLE ->{
-                leftIBtn = rootView.findViewById(R.id.header_layout_left_operate_v)
+                leftTv = rootView.findViewById(R.id.header_layout_left_operate_v)
                 centerTv = rootView.findViewById(R.id.header_layout_center_operate_v)
                 rightTv = rootView.findViewById(R.id.header_layout_right_operate_v)
 
             }
             BaseTitleStyle.TV_TV_IBTN_STYLE ->{
-                leftIBtn = rootView.findViewById(R.id.header_layout_left_operate_v)
+                leftTv = rootView.findViewById(R.id.header_layout_left_operate_v)
                 centerTv = rootView.findViewById(R.id.header_layout_center_operate_v)
                 rightIBtn = rootView.findViewById(R.id.header_layout_right_operate_v)
             }
             BaseTitleStyle.TV_IBTN_TV_STYLE ->{
-                leftIBtn = rootView.findViewById(R.id.header_layout_left_operate_v)
+                leftTv = rootView.findViewById(R.id.header_layout_left_operate_v)
                 centerIBtn = rootView.findViewById(R.id.header_layout_center_operate_v)
                 rightTv = rootView.findViewById(R.id.header_layout_right_operate_v)
             }
@@ -95,7 +95,7 @@ abstract class BaseInjectActivity<T : BaseContract.BasePresenter<*>> : BaseActiv
                 rightTv = rootView.findViewById(R.id.header_layout_right_operate_v)
             }
             BaseTitleStyle.TV_IBTN_IBTN_STYLE ->{
-                leftIBtn = rootView.findViewById(R.id.header_layout_left_operate_v)
+                leftTv = rootView.findViewById(R.id.header_layout_left_operate_v)
                 centerIBtn = rootView.findViewById(R.id.header_layout_center_operate_v)
                 rightIBtn = rootView.findViewById(R.id.header_layout_right_operate_v)
             }

@@ -26,8 +26,8 @@ class MainActivity : BaseInjectActivity<MainPresenter>(), MainContract.View{
         /*StatusBarUtil.setTranslucentForImageView(this, 0, null)
         StatusBarUtil.setLightMode(this)*/
 
-        var selectColor: Int
-        var unSelectColor: Int
+        var selectColor: Int?
+        var unSelectColor: Int?
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
             selectColor = resources.getColor(R.color.tab_checked, theme)
             unSelectColor = resources.getColor(R.color.tab_unchecked, theme)
