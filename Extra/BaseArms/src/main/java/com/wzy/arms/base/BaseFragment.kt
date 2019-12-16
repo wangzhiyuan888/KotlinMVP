@@ -38,9 +38,11 @@ abstract class BaseFragment: RxFragment() {
     protected var mInflater: LayoutInflater? = null
     protected var mContext: Context? = null
     // 标记初始化已经完成
-    protected var mIsPrepared: Boolean = false
+    protected var isPrepared: Boolean = false
+    // 是否为初次进入
+    protected var isFirstLoad: Boolean = false
     // 标志Fragment是否可见
-    protected var mIsVisible: Boolean = false
+    protected var mIsVisible: Boolean = true
 
     private var mUnbinder: Unbinder? = null
 
@@ -68,19 +70,18 @@ abstract class BaseFragment: RxFragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-
         initStub(view)
         initInject()
         initPresenter()
         initWidget()
         initSetListener()
-        if(!isViewPager()){
-            loadData()
+    }
 
-        }else{
-            finishCreateView(savedInstanceState)
-
-        }
+    override fun onActivityCreated(savedInstanceState: Bundle?) {
+        super.onActivityCreated(savedInstanceState)
+        isPrepared = true
+        isFirstLoad = true
+        lazyLoad()
     }
 
     /**
@@ -93,7 +94,6 @@ abstract class BaseFragment: RxFragment() {
         if (null != mContentView)
             mUnbinder = ButterKnife.bind(this, mContentView!!)
         mFailureStub = view.findViewById(R.id.failure_sub)
-
     }
 
     // ViewStub.inflate();执行完之后返回的View实际上是替换后的那个View的根布局
@@ -119,27 +119,15 @@ abstract class BaseFragment: RxFragment() {
     }
 
     /**
+     * 初次加载数据
+     */
+    protected open fun loadData() {
+    }
+
+    /**
      * 懒加载
      */
     protected open fun lazyLoadData() {
-    }
-
-    /**
-     * 判断是否为ViewPager的情况，是：true，否：false
-     * 如果为是的情况则会调用setUserVisibleHint方法进行懒加载的处理
-     */
-    protected open fun isViewPager():Boolean{
-        return false
-    }
-
-    /**
-     * 加载数据
-     */
-    protected open fun loadData() {}
-
-    open fun finishCreateView(state: Bundle?) {
-        mIsPrepared = true
-        lazyLoad()
     }
 
     /**
@@ -183,9 +171,16 @@ abstract class BaseFragment: RxFragment() {
      * 懒加载
      */
     protected open fun lazyLoad() {
-        if (!mIsPrepared || !mIsVisible) return
-        lazyLoadData()
-        mIsPrepared = false
+        if (!isPrepared || !mIsVisible)
+            return
+        if(isFirstLoad){
+            loadData()
+
+        }else{
+            lazyLoadData()
+
+        }
+        isFirstLoad = false
     }
 
     protected open fun onInvisible() {

@@ -48,7 +48,7 @@ class HomeFragment():BaseInjectFragment<HomePresenter>(), SpringView.OnFreshList
     override fun initPresenter() = mPresenter.attachView(this)
 
     override fun reLoadData() {
-        lazyLoadData()
+        loadData()
     }
 
     override fun initWidget() {
@@ -59,7 +59,6 @@ class HomeFragment():BaseInjectFragment<HomePresenter>(), SpringView.OnFreshList
 
     override fun loadData() {
         mPresenter.requestUsers(pageInfo.page, pageInfo.pageNumber, update)
-
     }
 
     override fun onRefresh() {

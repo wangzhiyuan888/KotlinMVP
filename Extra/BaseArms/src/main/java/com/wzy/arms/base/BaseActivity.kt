@@ -110,13 +110,6 @@ abstract class BaseActivity: RxAppCompatActivity(){
     }
 
     /**
-     * Fragment 与Activity间的互相通讯
-     * @param tag
-     */
-    open fun setFunctionsForFragment(tag: String) {
-    }
-
-    /**
      * 向存活的Activity发送消息
      */
     open fun sendMsg(action:String, value: Any){

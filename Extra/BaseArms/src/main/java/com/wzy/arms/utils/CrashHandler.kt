@@ -2,6 +2,7 @@ package com.wzy.arms.utils
 
 import android.annotation.SuppressLint
 import android.content.Context
+import timber.log.Timber
 
 /**
  * @author: wzy
@@ -34,7 +35,7 @@ object CrashHandler : Thread.UncaughtExceptionHandler {
             mExceptionHandler?.uncaughtException(t, e)
         } else {
             // 异常发生后的自定义操作
-            LogUtils.e("myError", e)
+            Timber.d("myError:$e")
         }
     }
 

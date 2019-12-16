@@ -3,11 +3,11 @@ package com.wzy.arms.di.subscriber
 import com.wzy.arms.di.contract.BaseContract
 import com.wzy.arms.network.helper.ApiException
 import com.wzy.arms.utils.AppUtils
-import com.wzy.arms.utils.LogUtils
 import com.wzy.arms.utils.NetworkUtils
 import com.wzy.arms.utils.ToastUtils
 import io.reactivex.subscribers.ResourceSubscriber
 import retrofit2.HttpException
+import timber.log.Timber
 import java.net.SocketTimeoutException
 
 /**
@@ -58,7 +58,7 @@ abstract class BaseSubscriber<T>(private val tag:String, private val view: BaseC
                     is HttpException -> it.showError(tag, "数据加载失败ヽ(≧Д≦)ノ")
                     else -> {
                         view.showError(tag, "未知错误ヽ(≧Д≦)ノ")
-                        LogUtils.e("MYERROR:$e")
+                        Timber.d("MYERROR:$e")
                     }
                 }
             }

@@ -1,6 +1,5 @@
 package com.wzy.arm.base
 
-import android.os.Bundle
 import android.support.v4.widget.SwipeRefreshLayout
 import android.support.v7.widget.RecyclerView
 import com.wzy.arm.R
@@ -39,19 +38,12 @@ abstract class BaseRefreshFragment<T : BaseContract.BasePresenter<*>, K> : BaseI
         mIsRefreshing = true
     }
 
-    override fun finishCreateView(state: Bundle?) {
-        mRefresh = mContentView?.findViewById(R.id.refresh) as SwipeRefreshLayout?
-        mRecycler = mContentView?.findViewById(R.id.recycler) as RecyclerView?
-        mIsPrepared = true
-        lazyLoad()
-    }
-
     override fun lazyLoad() {
-        if (!mIsPrepared || !mIsVisible) return
+        if (!isPrepared || !mIsVisible) return
         initRefreshLayout()
         initRecyclerView()
         mRefresh ?: lazyLoadData()
-        mIsPrepared = false
+        isPrepared = false
     }
 
     override fun complete() {

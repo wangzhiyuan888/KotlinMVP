@@ -8,6 +8,7 @@ import android.os.Build
 import android.os.IBinder
 import android.telephony.TelephonyManager
 import com.wzy.arms.widget.NetworkService
+import timber.log.Timber
 
 /**
  * @author: wzy
@@ -34,9 +35,9 @@ object NetworkUtils {
                 */
                 val CURRENT_NETWORK_STATE = intent.getIntExtra(NET_STATE_NAME, -1)
                 when (CURRENT_NETWORK_STATE) {
-                    -1 -> LogUtils.i(TAG, "网络更改为 无网络  CURRENT_NETWORK_STATE =$CURRENT_NETWORK_STATE")
-                    1 -> LogUtils.i(TAG, "网络更改为 WIFI网络  CURRENT_NETWORK_STATE=$CURRENT_NETWORK_STATE")
-                    2 -> LogUtils.i(TAG, "网络更改为 移动网络  CURRENT_NETWORK_STATE =$CURRENT_NETWORK_STATE")
+                    -1 -> Timber.d(TAG,"网络更改为 无网络  CURRENT_NETWORK_STATE =$CURRENT_NETWORK_STATE")
+                    1 -> Timber.d(TAG,"网络更改为 WIFI网络  CURRENT_NETWORK_STATE=$CURRENT_NETWORK_STATE")
+                    2 -> Timber.d(TAG,"网络更改为 移动网络  CURRENT_NETWORK_STATE =$CURRENT_NETWORK_STATE")
                 }
             }
         }
